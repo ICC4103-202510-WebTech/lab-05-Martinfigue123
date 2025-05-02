@@ -1,0 +1,14 @@
+<h1>New Message</h1>
+
+<%= form_with(model: @message, local: true) do |f| %>
+  <%= f.label :chat_id %>
+  <%= f.select :chat_id, Chat.all.collect { |c| ["Chat ##{c.id}", c.id] } %>
+
+  <%= f.label :user_id %>
+  <%= f.select :user_id, User.all.collect { |u| [u.email, u.id] } %>
+
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+
+  <%= f.submit "Send Message" %>
+<% end %>

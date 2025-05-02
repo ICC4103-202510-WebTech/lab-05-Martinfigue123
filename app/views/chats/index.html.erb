@@ -1,0 +1,18 @@
+<h1>Chats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chats.each do |chat| %>
+      <tr>
+        <td><%= chat.id %></td>
+        <td><%= link_to 'Show', chat_path(chat) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+<h1>New Chat</h1>
+
+<%= form_with(model: @chat, local: true) do |f| %>
+  <%= f.label :sender_id %>
+  <%= f.select :sender_id, User.all.collect { |u| [u.email, u.id] } %>
+
+  <%= f.label :receiver_id %>
+  <%= f.select :receiver_id, User.all.collect { |u| [u.email, u.id] } %>
+
+  <%= f.submit "Create Chat" %>
+<% end %>
