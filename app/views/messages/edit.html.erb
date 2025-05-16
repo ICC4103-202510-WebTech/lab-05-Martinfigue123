@@ -1,28 +1,24 @@
 <h1>Edit Message</h1>
 
-<%= form_with model: @message do |form| %>
-  <% if @message.errors.any? %>
-    <ul>
-      <% @message.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
+<%= form_with model: @message, local: true do |form| %>
   <div>
-    <%= form.label :body %>
+    <%= form.label :body %><br>
     <%= form.text_area :body %>
   </div>
 
   <div>
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
+    <%= form.label :user_id, "Sender" %><br>
+    <%= form.collection_select :user_id, User.all, :id, :first_name, :last_name, prompt: "Select User" %>
   </div>
 
   <div>
-    <%= form.label :chat_id %>
-    <%= form.number_field :chat_id %>
+    <%= form.label :chat_id, "Chat" %><br>
+    <%= form.collection_select :chat_id, Chat.all, :id, :first_name, :last_name, prompt: "Select Chat" %>
   </div>
 
-  <%= form.submit "Update Message" %>
+  <div>
+    <%= form.submit "Update Message" %>
+  </div>
 <% end %>
+
+<%= link_to 'Back', message_path(@message) %>
