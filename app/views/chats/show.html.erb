@@ -1,6 +1,10 @@
-<h1>Chat Details</h1>
+<h1>Chat between <%= @chat.sender.first_name %> and <%= @chat.receiver.first_name %></h1>
 
-<p><strong>ID:</strong> <%= @chat.id %></p>
-<p><strong>Title:</strong> <%= @chat.title %></p>
+<h2>Messages</h2>
+<ul>
+  <% @chat.messages.each do |message| %>
+    <li><%= message.user.first_name %>: <%= message.body %></li>
+  <% end %>
+</ul>
 
-<%= link_to 'Back to Chats', chats_path %>
+<%= link_to "Edit Chat", edit_chat_path(@chat) %>

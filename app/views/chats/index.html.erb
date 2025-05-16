@@ -12,7 +12,9 @@
       <tr>
         <td><%= chat.id %></td>
         <td><%= link_to 'Show', chat_path(chat) %></td>
+        <td><%= link_to "Edit", edit_chat_path(chat) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+

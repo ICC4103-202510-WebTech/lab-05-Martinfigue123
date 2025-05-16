@@ -1,0 +1,15 @@
+<h1>Edit Chat</h1>
+
+<%= form_with model: @chat do |form| %>
+  <div>
+    <%= form.label :sender_id %>
+    <%= form.number_field :sender_id %>
+  </div>
+
+  <div>
+    <%= form.label :receiver_id %>
+    <%= form.number_field :receiver_id %>
+  </div>
+
+  <%= form.submit "Update Chat" %>
+<% end %>

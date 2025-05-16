@@ -1,0 +1,28 @@
+<h1>Edit Message</h1>
+
+<%= form_with model: @message do |form| %>
+  <% if @message.errors.any? %>
+    <ul>
+      <% @message.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :chat_id %>
+    <%= form.number_field :chat_id %>
+  </div>
+
+  <%= form.submit "Update Message" %>
+<% end %>
