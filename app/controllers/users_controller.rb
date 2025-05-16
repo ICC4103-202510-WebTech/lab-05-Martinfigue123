@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
- def update
+  def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user, notice: "User was successfully updated."
+      redirect_to @user, notice: "#{@user.first_name} #{@user.last_name} fue actualizado exitosamente."
     else
       render :edit
     end
@@ -27,6 +27,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+  end
+
+  def show
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      redirect_to users_path, alert: "Usuario no encontrado."
+    end
   end
 
   private
