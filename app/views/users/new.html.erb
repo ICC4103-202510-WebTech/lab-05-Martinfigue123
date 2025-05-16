@@ -1,14 +1,18 @@
-<h1>New User</h1>
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<p>Email: <%= @user.email %></p>
 
-<%= form_with(model: @user, local: true) do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
+<h2>Chats</h2>
+<ul>
+  <% @chats.each do |chat| %>
+    <li><%= link_to "Chat ##{chat.id}", chat_path(chat) %></li>
+  <% end %>
+</ul>
 
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+<h2>Messages</h2>
+<ul>
+  <% @messages.each do |message| %>
+    <li><%= link_to message.body, message_path(message) %></li>
+  <% end %>
+</ul>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  
-  <%= f.submit "Create User" %>
-<% end %>
+<%= link_to 'Edit user', edit_user_path(@user) %>

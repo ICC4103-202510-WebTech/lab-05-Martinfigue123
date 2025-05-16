@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @chats = Chat.where(sender_id: @user.id).or(Chat.where(receiver_id: @user.id))
+    @messages = @user.messages
+  end
+
   def new
     @user = User.new
   end
@@ -6,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to users_path
+      redirect_to @user
     else
       render :new
     end
@@ -19,24 +29,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user, notice: "#{@user.first_name} #{@user.last_name} fue actualizado exitosamente."
+      redirect_to @user, notice: "User was successfully updated."
     else
       render :edit
     end
   end
 
-  def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.find_by(id: params[:id])
-    if @user.nil?
-      redirect_to users_path, alert: "Usuario no encontrado."
-    end
-  end
-
   private
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email)
   end

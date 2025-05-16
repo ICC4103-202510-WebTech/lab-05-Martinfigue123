@@ -1,42 +1,44 @@
 class ChatsController < ApplicationController
-    def new
-      @chat = Chat.new
-    end
+  def index
+    @chats = Chat.all
+  end
 
-    def show
-      @chat = Chat.find(params[:id])
-    end
-    
-    def create
-      @chat = Chat.new(chat_params)
-      if @chat.save
-        redirect_to chats_path
-      else
-        render :new
-      end
-    end
-  
-    def index
-      @chats = Chat.all
-    end
+  def show
+    @chat = Chat.find(params[:id])
+    @messages = @chat.messages
+    @sender = User.find(@chat.sender_id)
+    @receiver = User.find(@chat.receiver_id)
+  end
 
-    def edit
-  @chat = Chat.find(params[:id])
+  def new
+    @chat = Chat.new
+  end
+
+  def create
+    @chat = Chat.new(chat_params)
+    if @chat.save
+      redirect_to @chat
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @chat = Chat.find(params[:id])
+  end
 
   def update
     @chat = Chat.find(params[:id])
     if @chat.update(chat_params)
-      redirect_to @chat, notice: "Chat was successfully updated."
+      redirect_to @chat, notice: "Chat updated successfully."
     else
       render :edit
     end
   end
-end
-  
-    private
-  
-    def chat_params
-      params.require(:chat).permit(:sender_id, :receiver_id)
-    end
+
+  private
+
+  def chat_params
+    params.require(:chat).permit(:sender_id, :receiver_id)
   end
-  
+end
