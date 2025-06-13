@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:new, :create, :index]
   end
   devise_for :users
-  resources :users, only: [:index, :show, :new, :create, :edit, :destroy]
+  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   root "users#index"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

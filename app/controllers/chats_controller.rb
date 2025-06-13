@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   def index
-    @chats = Chat.all
+    @chats = Chat.involving(current_user)
   end
 
   def show
