@@ -1,24 +1,26 @@
 <h1>Edit Message</h1>
 
 <%= form_with model: @message, local: true do |form| %>
-  <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
+  <div class="mb-3">
+    <%= form.label :body, class: "form-label" %>
+    <%= form.text_area :body, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :user_id, "Sender" %><br>
-    <%= form.collection_select :user_id, User.all, :id, :name, prompt: "Select User" %>
+  <div class="mb-3">
+    <%= form.label :user_id, "Sender", class: "form-label" %>
+    <%= form.collection_select :user_id, User.all, :id, ->(u) { "#{u.first_name} #{u.last_name}" },
+          { prompt: "Select User" }, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.label :chat_id, "Chat" %><br>
-    <%= form.collection_select :user_id, User.all, :id, :name, prompt: "Select User" %>
+  <div class="mb-3">
+    <%= form.label :chat_id, "Chat", class: "form-label" %>
+    <%= form.collection_select :chat_id, Chat.all, :id, ->(c) { "Chat ##{c.id}" },
+          { prompt: "Select Chat" }, { class: "form-select" } %>
   </div>
 
-  <div>
-    <%= form.submit "Update Message" %>
-  </div>
+  <%= form.submit "Update Message", class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to 'Back', message_path(@message) %>
+<div class="mt-3">
+  <%= link_to 'Back', message_path(@message), class: "btn btn-link" %>
+</div>

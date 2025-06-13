@@ -1,14 +1,26 @@
 <h1>New Message</h1>
 
-<%= form_with(model: @message, local: true) do |f| %>
-  <%= f.label :chat_id %>
-  <%= f.select :chat_id, Chat.all.collect { |c| ["Chat ##{c.id}", c.id] } %>
+<%= form_with model: @message, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :chat_id, "Chat", class: "form-label" %>
+    <%= f.collection_select :chat_id, Chat.all, :id, ->(c) { "Chat ##{c.id}" },
+          { prompt: "Select Chat" }, { class: "form-select" } %>
+  </div>
 
-  <%= f.label :user_id %>
-  <%= f.select :user_id, User.all.collect { |u| [u.email, u.id] } %>
+  <div class="mb-3">
+    <%= f.label :user_id, "User", class: "form-label" %>
+    <%= f.collection_select :user_id, User.all, :id, ->(u) { "#{u.first_name} #{u.last_name}" },
+          { prompt: "Select User" }, { class: "form-select" } %>
+  </div>
 
-  <%= f.label :body %>
-  <%= f.text_area :body %>
+  <div class="mb-3">
+    <%= f.label :body, class: "form-label" %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
 
-  <%= f.submit "Send Message" %>
+  <%= f.submit "Send Message", class: "btn btn-success" %>
 <% end %>
+
+<div class="mt-3">
+  <%= link_to 'Back to Messages', messages_path, class: "btn btn-link" %>
+</div>
