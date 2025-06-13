@@ -1,20 +1,19 @@
-<h1>Chats</h1>
+<h1 class="mb-4">Chats</h1>
 
-<table>
-  <thead>
+<table class="table table-striped table-hover">
+  <thead class="table-light">
     <tr>
       <th>ID</th>
-      <th></th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @chats.each do |chat| %>
       <tr>
         <td><%= chat.id %></td>
-        <td><%= link_to 'Show', chat_path(chat) %></td>
-        <td><%= link_to "Edit", edit_chat_path(chat) %></td>
+        <td><%= link_to 'Show', chat_path(chat), class: "btn btn-sm btn-primary" %></td>
+        <td><%= link_to "Edit", edit_chat_path(chat), class: "btn btn-sm btn-outline-secondary" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
